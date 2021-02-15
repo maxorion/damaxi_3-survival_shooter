@@ -33,15 +33,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Mendapatkan nilai input horizontal (-1, 0, 1)
-        float h = Input.GetAxisRaw("Horizontal");
+        // // Mendapatkan nilai input horizontal (-1, 0, 1)
+        // float h = Input.GetAxisRaw("Horizontal");
 
-        // Mendapatkan nilai input vertical (-1, 0, 1)
-        float v = Input.GetAxisRaw("Vertical");
+        // // Mendapatkan nilai input vertical (-1, 0, 1)
+        // float v = Input.GetAxisRaw("Vertical");
 
-        Move(h, v);
+        // Move(h, v);
         Turning();
-        Animating(h, v);
+        // Animating(h, v);
     }
 
     // Method player dapat berjalan

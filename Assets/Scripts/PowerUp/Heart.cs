@@ -30,6 +30,8 @@ public class Heart : MonoBehaviour {
             gameObject.transform.localScale= Vector3.zero;
             Light objLight = gameObject.GetComponent<Light>();
             objLight.enabled = false;
+            Collider selfTrigColl = gameObject.GetComponent<Collider>();
+            selfTrigColl.enabled = false;
             Destroy(gameObject, 2f);
         }
     }

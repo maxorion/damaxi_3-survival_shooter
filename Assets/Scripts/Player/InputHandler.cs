@@ -6,36 +6,59 @@ public class InputHandler : MonoBehaviour
 {
     public PlayerMovement playerMovement;
     public PlayerShooting playerShooting;
+    public PlayerHealth playerHealth;
 
     // Queue untuk menyimpan list command
     Queue<Command> commands = new Queue<Command>();
 
     void FixedUpdate()
     {
-        // Menghandle input movement
-        Command moveCommand = InputMovementHandling();
-        if (moveCommand != null)
+        if (playerHealth.currentHealth > 0)
         {
-            commands.Enqueue(moveCommand);
+            // Menghandle input movement
+            Command moveCommand = InputMovementHandling();
+            if (moveCommand != null)
+            {
+                commands.Enqueue(moveCommand);
 
-            moveCommand.Execute();
+                moveCommand.Execute();
+            }
         }
     }
 
     void Update()
     {
-        // Mengahndle shoot
-        Command shootCommand = InputShootHandling();
-        if (shootCommand != null)
+        if (playerHealth.currentHealth > 0)
         {
-            shootCommand.Execute();
+            // Mengahndle shoot
+            Command shootCommand = InputShootHandling();
+            if (shootCommand != null)
+            {
+                shootCommand.Execute();
+            }
         }
     }
 
     Command InputMovementHandling()
     {
         // Check jika movement sesuai dengan key nya
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.W))
+        {
+            return new MoveCommand(playerMovement, 1, 1);
+        }
+        else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
+        {
+            return new MoveCommand(playerMovement, 1, -1);
+        }
+        else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
+        {
+            return new MoveCommand(playerMovement, -1, 1);
+        }
+        else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
+        {
+            return new MoveCommand(playerMovement, -1, -1);
+        }
+        else if (Input.GetKey(KeyCode.D))
         {
             return new MoveCommand(playerMovement, 1, 0);
         }
