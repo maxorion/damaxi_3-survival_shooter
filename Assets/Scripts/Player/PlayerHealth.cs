@@ -74,6 +74,21 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Heal(int amount)
+    {
+        if ((currentHealth + amount) > startingHealth)
+        {
+            currentHealth = startingHealth;
+        }
+        else
+        {
+            currentHealth += amount;
+        }
+
+        // Merubah tampilan dari health slider
+        healthSlider.value = currentHealth;
+    }
+
 
     void Death()
     {

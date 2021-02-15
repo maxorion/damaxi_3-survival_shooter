@@ -35,7 +35,8 @@ public class EnemyManager : MonoBehaviour
 
         // Menduplikasi enemy
         // Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-        Factory.FactoryMethod(spawnEnemy);
+        GameObject neoEnemy = Factory.FactoryMethod(spawnEnemy);
+        neoEnemy.transform.position = spawnPoints[spawnEnemy].position;
 
     }
 }

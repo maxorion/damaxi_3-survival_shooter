@@ -81,6 +81,13 @@ public class EnemyHealth : MonoBehaviour
         // play Sound dead
         enemyAudio.clip = deathClip;
         enemyAudio.Play();
+
+        // Adds score
+        GameObject scoreObj = GameObject.FindGameObjectWithTag("Score");
+
+        // Mendapatkan komponen Player Health
+        ScoreManager scoreMngr = scoreObj.GetComponent<ScoreManager>();
+        scoreMngr.addScore(scoreValue);
     }
 
 

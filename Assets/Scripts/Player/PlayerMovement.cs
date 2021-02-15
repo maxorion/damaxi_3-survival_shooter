@@ -9,6 +9,13 @@ public class PlayerMovement : MonoBehaviour
     int floorMask;
     float camRayLength = 100f;
 
+    float defaultSpeed;
+
+    bool speedingUp = false;
+
+    float speedUpTimer = 0;
+    float speedUpLength = 0;
+
     private void Awake()
     {
         // Mendapatkan nilai mask dari layer yang bernama Floor
@@ -19,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Mendapatkan komponen RigidBody
         playerRigidBody = GetComponent<Rigidbody>();
+
+        // Dapatkan speed asal
+        defaultSpeed = speed;
     }
 
     private void FixedUpdate()
@@ -74,5 +84,27 @@ public class PlayerMovement : MonoBehaviour
     {
         bool walking = h != 0f || v != 0f;
         anim.SetBool("IsWalking", walking);
+    }
+
+    public void SpeedUp(float amount, float length)
+    {
+        speed += amount;
+        speedingUp = true;
+        speedUpTimer = 0f;
+        speedUpLength = length;
+    }
+
+    private void Update()
+    {
+        if (speedingUp)
+        {
+            // Debug.Log("IS SPED UP!!!");
+            speedUpTimer += Time.deltaTime;
+            if (speedUpTimer > speedUpLength)
+            {
+                speedingUp = false;
+                speed = defaultSpeed;
+            }
+        }
     }
 }
